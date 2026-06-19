@@ -227,6 +227,10 @@
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
             border: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .character-card:active {
@@ -234,7 +238,22 @@
         }
 
         .character-icon {
-            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8fafc;
+            border: 3px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .character-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .character-name {
@@ -304,16 +323,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 4rem;
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: all 0.3s;
             border: 5px solid var(--primary);
+            overflow: hidden;
+        }
+
+        .profesion-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
         }
 
         .profesion-item:hover {
             transform: scale(1.1);
             box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .profesion-item:hover img {
+            transform: scale(1.1);
         }
 
         .message-box {
@@ -370,6 +400,23 @@
         @keyframes fall {
             to { transform: translateY(100vh) rotate(360deg); }
         }
+
+        .welcome-banner {
+            width: 100%;
+            max-width: 500px;
+            height: 250px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            margin: 30px 0;
+            border: 6px solid white;
+        }
+
+        .welcome-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -382,8 +429,10 @@
         
         <!-- Screen: Welcome -->
         <div id="screen-welcome" class="screen active">
-            <div style="font-size: 6rem; margin: 40px 0;">🏫🦉</div>
-            <h2 style="font-size: 2.5rem; text-align: center; color: var(--secondary); margin-bottom: 30px;">¡Descubre los oficios de nuestra comunidad!</h2>
+            <div class="welcome-banner">
+                <img src="images/cover.png" alt="Tecolotlán" class="welcome-img">
+            </div>
+            <h2 style="font-size: 2.3rem; text-align: center; color: var(--secondary); margin-bottom: 30px; font-weight: 900; line-height: 1.3;">¡Descubre los oficios de nuestra comunidad!</h2>
             <button class="btn" onclick="startGame()">
                 <span style="font-size: 2rem;">▶️</span> ¡Jugar!
             </button>
@@ -549,15 +598,15 @@
 
         // Feria variables
         const professionsData = [
-            { id: 'campesino', emoji: '🧑‍🌾', name: 'Campesino', message: 'El campesino siembra y cosecha los alimentos. ¡Gracias a él, tenemos verduras frescas para crecer muy fuertes!' },
-            { id: 'comerciante', emoji: '🏪', name: 'Comerciante', message: 'El comerciante tiene su tiendita y nos ayuda a conseguir comida o ropa cerca de casa. ¡Es muy útil para la comunidad!' },
-            { id: 'bombero', emoji: '👨‍🚒', name: 'Bombero', message: 'El bombero es súper valiente. Apaga los incendios y ayuda en accidentes para mantenernos a todos seguros.' },
-            { id: 'policia', emoji: '👮', name: 'Policía', message: 'El policía cuida de las calles y nos protege. Ayuda a mantener el orden y la seguridad de todas las familias.' },
-            { id: 'dentista', emoji: '🦷', name: 'Dentista', message: 'La dentista cuida de nuestros dientes. Nos enseña a cepillarnos muy bien para tener una sonrisa sana y brillante.' },
-            { id: 'recolector', emoji: '🗑️', name: 'Recolector de basura', message: 'El recolector limpia nuestras calles y se lleva la basura. ¡Gracias a él, Tecolotlán se mantiene limpio y hermoso!' },
-            { id: 'maestra', emoji: '👩‍🏫', name: 'Maestra', message: 'La maestra nos enseña cosas nuevas y divertidas en la escuela. ¡Nos ayuda a ser niños muy listos y aprender cada día!' },
-            { id: 'estilista', emoji: '💇', name: 'Estilista', message: 'La estilista nos corta y peina el cabello para que nos veamos muy guapos y limpios. ¡Usa tijeras y peines con mucho cuidado!' },
-            { id: 'constructor', emoji: '👷', name: 'Constructor', message: 'El constructor construye casas, escuelas y parques. ¡Con su casco y herramientas hace espacios seguros para jugar y vivir!' }
+            { id: 'campesino', emoji: '🧑‍🌾', image: 'images/campesino.png', name: 'Campesino', message: 'El campesino siembra y cosecha los alimentos. ¡Gracias a él, tenemos verduras frescas para crecer muy fuertes!' },
+            { id: 'comerciante', emoji: '🏪', image: 'images/comerciante.png', name: 'Comerciante', message: 'El comerciante tiene su tiendita y nos ayuda a conseguir comida o ropa cerca de casa. ¡Es muy útil para la comunidad!' },
+            { id: 'bombero', emoji: '👨‍🚒', image: 'images/bombero.png', name: 'Bombero', message: 'El bombero es súper valiente. Apaga los incendios y ayuda en accidentes para mantenernos a todos seguros.' },
+            { id: 'policia', emoji: '👮', image: 'images/policia.png', name: 'Policía', message: 'El policía cuida de las calles y nos protege. Ayuda a mantener el orden y la seguridad de todas las familias.' },
+            { id: 'dentista', emoji: '🦷', image: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=400', name: 'Dentista', message: 'La dentista cuida de nuestros dientes. Nos enseña a cepillarnos muy bien para tener una sonrisa sana y brillante.' },
+            { id: 'recolector', emoji: '🗑️', image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=400', name: 'Recolector de basura', message: 'El recolector limpia nuestras calles y se lleva la basura. ¡Gracias a él, Tecolotlán se mantiene limpio y hermoso!' },
+            { id: 'maestra', emoji: '👩‍🏫', image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=400', name: 'Maestra', message: 'La maestra nos enseña cosas nuevas y divertidas en la escuela. ¡Nos ayuda a ser niños muy listos y aprender cada día!' },
+            { id: 'estilista', emoji: '💇', image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=400', name: 'Estilista', message: 'La estilista nos corta y peina el cabello para que nos veamos muy guapos y limpios. ¡Usa tijeras y peines con mucho cuidado!' },
+            { id: 'constructor', emoji: '👷', image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=400', name: 'Constructor', message: 'El constructor construye casas, escuelas y parques. ¡Con su casco y herramientas hace espacios seguros para jugar y vivir!' }
         ];
 
         // System Functions
@@ -624,7 +673,11 @@
                 
                 const icon = document.createElement('div');
                 icon.classList.add('character-icon');
-                icon.innerText = prof.emoji;
+                
+                const img = document.createElement('img');
+                img.src = prof.image;
+                img.alt = prof.name;
+                icon.appendChild(img);
                 
                 const name = document.createElement('div');
                 name.classList.add('character-name');
@@ -830,7 +883,12 @@
             professionsData.forEach(prof => {
                 const el = document.createElement('div');
                 el.classList.add('profesion-item');
-                el.innerText = prof.emoji;
+                
+                const img = document.createElement('img');
+                img.src = prof.image;
+                img.alt = prof.name;
+                el.appendChild(img);
+                
                 el.onclick = () => showProfessionInfo(prof);
                 container.appendChild(el);
             });
@@ -839,7 +897,13 @@
         function showProfessionInfo(prof) {
             const msgBox = document.getElementById('feria-message');
             msgBox.style.display = 'block';
-            msgBox.innerHTML = `<strong>${prof.name} ${prof.emoji}</strong><br><br>${prof.message}`;
+            msgBox.innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; padding: 10px;">
+                    <img src="${prof.image}" alt="${prof.name}" style="width: 150px; height: 150px; border-radius: 20px; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <strong style="font-size: 1.8rem; color: var(--secondary);">${prof.name}</strong>
+                    <div style="font-size: 1.25rem; margin-top: 5px; color: var(--text-dark); line-height: 1.5; text-align: justify;">${prof.message}</div>
+                </div>
+            `;
             
             setInstruction(prof.message);
             createConfetti();
